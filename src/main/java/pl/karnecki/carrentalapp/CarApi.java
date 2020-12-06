@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import pl.karnecki.carrentalapp.entity.Car;
 
-import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/my-cars")
@@ -22,7 +22,7 @@ public class CarApi {
     }
 
     @GetMapping("/all")
-    public List<Car> getAllCars() {
+    public Iterable<Car> getAllCars() {
         var allMyCars = carService.giveAllCars();
         log.info("Returned list of all my cars");
         return allMyCars;
@@ -30,7 +30,7 @@ public class CarApi {
 
     @GetMapping("/car/{id}")
 
-    public Car getCarById(@PathVariable("id") Long id) {
+    public Optional<Car> getCarById(@PathVariable("id") Long id) {
 
         log.info("Found car by id: [{}]", id);
         return carService.findCarById(id);
@@ -38,22 +38,22 @@ public class CarApi {
 
     //dodaje
     @PostMapping("/all")
-    public boolean addCar(@RequestBody Car car) {
+    public Car addCar(@RequestBody Car car) {
         log.info("Add car: [{}] to my cars", car);
-        return carService.addCar(car);
+        return carService.saveCar(car);
     }
 
     //nadpisuje
     @PutMapping("/all")
-    public boolean updateCar(@RequestBody Car car) {
+    public Car updateCar(@RequestBody Car car) {
         log.info("Update car: [{}] details", car);
-        return carService.addCar(car);
+        return carService.updateCar(car);
     }
 
     @DeleteMapping("/car/{id}")
-    public boolean deleteCar(@PathVariable("id") Long id) {
+    public void deleteCarById(@PathVariable("id") Long id) {
         log.info("Delete car id: [{}] from my cars", id);
-        return getAllCars().removeIf(car -> car.getId() == id);
+        carService.deleteCar(id);
     }
 
 }
