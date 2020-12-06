@@ -2,6 +2,7 @@ package pl.karnecki.carrentalapp;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import pl.karnecki.carrentalapp.entity.Car;
 
 import java.util.List;
@@ -21,7 +22,6 @@ public class CarService {
         var cars = carRepository.myCars();
 
         log.info("All my cars: {}", cars);
-
         return cars;
 
     }
@@ -32,5 +32,10 @@ public class CarService {
 
         log.info("Found car with id: [{}]", result);
         return result;
+    }
+    public boolean addCar(@RequestBody Car car){
+
+        log.info("Adding new car: [{}] to my cars", car);
+        return carRepository.myCars().add(car);
     }
 }

@@ -3,10 +3,7 @@ package pl.karnecki.carrentalapp;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.karnecki.carrentalapp.entity.Car;
 
 import java.util.List;
@@ -26,9 +23,9 @@ public class CarApi {
 
     @GetMapping("/all")
     public List<Car> getAllCars() {
-
+        var allMyCars = carService.giveAllCars();
         log.info("Returned list of all my cars");
-        return carService.giveAllCars();
+        return allMyCars;
     }
 
     @GetMapping("/car/{id}")
@@ -37,6 +34,26 @@ public class CarApi {
 
         log.info("Found car by id: [{}]", id);
         return carService.findCarById(id);
+    }
+
+    //dodaje
+    @PostMapping("/all")
+    public boolean addCar(@RequestBody Car car) {
+        log.info("Add car: [{}] to my cars", car);
+        return carService.addCar(car);
+    }
+
+    //nadpisuje
+    @PutMapping("/all")
+    public boolean updateCar(@RequestBody Car car) {
+        log.info("Update car: [{}] details", car);
+        return carService.addCar(car);
+    }
+
+    @DeleteMapping("/car/{id}")
+    public boolean deleteCar(@PathVariable("id") Long id) {
+        log.info("Delete car id: [{}] from my cars", id);
+        return getAllCars().removeIf(car -> car.getId() == id);
     }
 
 }
