@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>My cars</title>
+</head>
+<body>
+<p>Hello stranger!</p>
+<p>All my available cars</p>
+<table>
+    <thead>
+    <tr>
+        <td>manufacturer</td>
+        <td>model</td>
+        <td>body</td>
+        <td>productionYear</td>
+        <td>horsePower</td>
+        <td>engineCapacity</td>
+        <td>color</td>
+        <td>pricePerDay</td>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="Car: ${myCars}">
+        <td th:text="${car.manufacturer}"></td>
+        <td th:text="${machine.capacityInMl}"></td>
+        <td th:text="${machine.typeOfCoffee}"></td>
+        <td th:text="${machine.milky}"></td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<a href="#" th:href="@{/}">Return to home page</a>
+</body>
+</html>

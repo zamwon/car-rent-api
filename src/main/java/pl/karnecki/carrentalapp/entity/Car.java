@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity
+
 public class Car {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
