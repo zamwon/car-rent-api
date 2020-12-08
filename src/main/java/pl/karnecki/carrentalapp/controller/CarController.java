@@ -4,6 +4,7 @@ package pl.karnecki.carrentalapp.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.karnecki.carrentalapp.service.CarService;
@@ -13,6 +14,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
+@Controller
 @RequestMapping("/api/my-cars")
 public class CarController {
 
@@ -26,12 +28,12 @@ public class CarController {
 
     }
 
-
-    @GetMapping("/welcome")
+   @GetMapping("/allCars")
     public String myCars(Model model) {
+
         var allCars = carService.giveAllCars();
         model.addAttribute(CARS, allCars);
-        return "offer";
+        return "cars/offer";
     }
 
     @GetMapping("/all")

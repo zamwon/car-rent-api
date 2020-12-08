@@ -22,11 +22,15 @@
     </thead>
     <tbody>
 
-    <tr th:each="Car: ${myCars}">
-        <td th:text="${car.manufacturer}"></td>
-        <td th:text="${machine.capacityInMl}"></td>
-        <td th:text="${machine.typeOfCoffee}"></td>
-        <td th:text="${machine.milky}"></td>
+    <tr th:each =" car : ${cars}">
+        <td th:text="${car.getId()()}"></td>
+        <td th:text="${car.getManufacturer()}"></td>
+        <td th:text="${car.getModel()}"></td>
+        <td th:text="${car.getProductionYear()}"></td>
+        <td th:text="${car.getHorsePower()}"></td>
+        <td th:text="${car.getEngineCapacity()}"></td>
+        <td th:text="${car.getColor()}"></td>
+        <td th:text="${car.getPricePerDay()()}"></td>
     </tr>
     </tbody>
 </table>
